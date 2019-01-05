@@ -1,0 +1,143 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use DateTime;
+
+# loosly based on https://github.com/etiennetremel/PHP-Find-Date-in-String
+# here's the author information from that
+
+# /**
+# * Find Date in a String
+#  *
+#  * @author   Etienne Tremel
+#  * @license  http://creativecommons.org/licenses/by/3.0/ CC by 3.0
+#  * @link     http://www.etiennetremel.net
+#  * @version  0.2.0
+#  *
+#  * @param string  find_date( ' some text 01/01/2012 some text' ) or find_date( ' some text October 5th 86 some text' )
+# * @return mixed  false if no date found else array: array( 'day' => 01, 'month' => 01, 'year' => 2012 )
+# */
+
+my @month_names = (
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december"
+);
+
+my @day_names = (
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+  );
+
+my @ordinal_number = ('st', 'nd', 'rd', 'th');
+
+my @short_month_names = map { shortenize($_) } @month_names;
+my @short_day_names = map { shortenize($_) } @day_names;
+
+my $d = join('|', @day_names);
+my $sd = join('|', @short_day_names);
+my $o = join('|', @ordinal_number);
+my $m = join('|', @month_names);
+my $sm = join('|', @short_month_names);
+
+find_date('Today is 5/1/19');
+find_date('Sunday 1st March 2015');
+find_date('Sunday, 1 March 2015');
+find_date('Sun 1 Mar 2015');
+find_date('Sun-1-March-2015');
+find_date('March 1st 2015');
+find_date('March 1 2015');
+find_date('March-1st-2015');
+
+sub shortenize
+{
+	return substr(shift, 0, 3);
+};
+
+sub find_date
+{
+	my $string = shift;
+
+	my $day;
+	my $month;
+	my $year;
+
+  if($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/) {
+  # Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
+      $day = $1;
+      $month = $2;
+      $year = $3;
+  } elsif($string =~ /($d|$sd)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]*($m|$sm)[\s,\-\/]+(\d{4})/i) {
+#  Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
+       $day //= $2;
+       $month //= $4;
+       $year //= $5;
+   } elsif($string =~ /($m|$sm)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]+(\d{4})/i) {
+		$month //= $1;
+		$day //= $2;
+		$year //= $4;
+	}
+
+	if(!defined($month)) {
+#   // Match month name:
+		if($string =~ /($m|$sm)/) {
+			$month = $1;
+		}
+	}
+
+	if(!defined($year)) {
+	#   // Match Year if not already set
+		if($string =~ /(\d{4})/) {
+			$year = $1;
+		}
+	}
+
+	if(defined($month) && defined($year) && !defined($day)) {
+		# Match "Sunday 1st"
+		if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)/i) {
+			$day = $1;
+		}
+	}
+
+      if($day && $month && $year) {
+      	if($year < 100) {
+		$year += 2000;
+	}
+	      $month = lc($month);
+	      if($month =~ /[a-z]/i) {
+	     	my $index;
+
+		foreach my $i(0..11) {
+			if(($month eq $month_names[$i]) || ($month eq $short_month_names[$i])) {
+				$index = $i + 1;
+				last;
+			}
+		}
+		if(defined($index)) {
+		      my $rc = DateTime->new(day => $day, month => $index, year => $year);
+		      print "$rc\n";
+		      return;
+		}
+	     } else {
+		      my $rc = DateTime->new(day => $day, month => $month, year => $year);
+		      print "$rc\n";
+		      return;
+		}
+	}
+	die "Can't find a date in $string";
+}
