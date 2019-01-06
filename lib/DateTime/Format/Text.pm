@@ -157,16 +157,10 @@ sub parse {
 			}
 			$month = lc($month);
 			if($month =~ /[a-z]/i) {
-				my $index;
-
 				foreach my $i(0..11) {
 					if(($month eq $month_names[$i]) || ($month eq $short_month_names[$i])) {
-						$index = $i + 1;
-						last;
+						return DateTime->new(day => $day, month => $i + 1, year => $year);
 					}
-				}
-				if(defined($index)) {
-					return DateTime->new(day => $day, month => $index, year => $year);
 				}
 			} else {
 				return DateTime->new(day => $day, month => $month, year => $year);
