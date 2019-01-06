@@ -174,10 +174,10 @@ Nigel Horne, C<< <njh at bandsman.co.uk> >>
 Based on https://github.com/etiennetremel/PHP-Find-Date-in-String.
 Here's the author information from that:
 
-    @author   Etienne Tremel
-    @license  http://creativecommons.org/licenses/by/3.0/ CC by 3.0
-    @link     http://www.etiennetremel.net
-    @version  0.2.0
+    author   Etienne Tremel
+    license  http://creativecommons.org/licenses/by/3.0/ CC by 3.0
+    link     http://www.etiennetremel.net
+    version  0.2.0
 
 =head1 BUGS
 
