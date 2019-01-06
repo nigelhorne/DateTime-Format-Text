@@ -2,15 +2,16 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 5;
+use Test::Most;
 use DateTime::Format::Text;
 
 eval 'use Test::Carp';
 
 ERROR: {
 	if($@) {
-		plan skip_all => 'Test::Carp needed to check error messages';
+		plan(skip_all => 'Test::Carp needed to check error messages');
 	} else {
+		plan(tests => 5);
 		my $dft = new_ok('DateTime::Format::Text');
 		ok(!defined($dft->parse('29 SepX 1939')));
 		does_croak_that_matches(sub { $dft->parse({ date => '30 Sep 1939' }) }, qr/^Usage:/);
