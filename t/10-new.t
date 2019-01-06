@@ -1,8 +1,7 @@
 #!perl -wT
 
+use warnings;
 use strict;
-
-use lib 'lib';
 use Test::Most tests => 2;
 use DateTime::Format::Text;
 
