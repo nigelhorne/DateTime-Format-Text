@@ -15,6 +15,7 @@ WriteMakefile(
 	TEST_REQUIRES => {
 		'Test::Most' => 0,
 		'Test::Pod' => 0,
+		'Test::Pod::LinkCheck' => 0,
 		'Test::Pod::Spelling::CommonMistakes' => 0,
 		'Test::Spelling' => 0,
 		'strict' => 0,

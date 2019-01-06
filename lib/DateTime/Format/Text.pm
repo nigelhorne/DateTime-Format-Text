@@ -69,6 +69,7 @@ Find a date in any text.
 =head2 new
 
 Creates a DateTime::Format::Text object.
+Takes no arguments
 
 =cut
 
@@ -80,6 +81,13 @@ sub new {
 
 	return bless { }, $class;
 }
+
+=head2 parse
+
+Creates a DateTime::Format::Text object.
+Returns a L<DateTime> object constructed from a date/time string embedding in text.
+
+=cut
 
 sub parse {
 	my $self = shift;
@@ -175,7 +183,7 @@ Based on https://github.com/etiennetremel/PHP-Find-Date-in-String.
 Here's the author information from that:
 
     author   Etienne Tremel
-    license  http://creativecommons.org/licenses/by/3.0/ CC by 3.0
+    license  https://creativecommons.org/licenses/by/3.0/ CC by 3.0
     link     http://www.etiennetremel.net
     version  0.2.0
 
