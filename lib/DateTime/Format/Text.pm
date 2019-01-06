@@ -172,6 +172,8 @@ sub parse {
 				return DateTime->new(day => $day, month => $month, year => $year);
 			}
 		}
+	} else {
+		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
 	}
 }
 
