@@ -2,8 +2,8 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 30;
-use Test::Deeply;
+use Test::Most tests => 14;
+use Test::Deep;
 use Test::NoWarnings;
 
 BEGIN {
@@ -13,40 +13,20 @@ BEGIN {
 TEXT: {
 	my $dft = new_ok('DateTime::Format::Text');
 
-	my $dt = $dft->parse('Today is 5/1/19');
-	ok($dt->day() == 5);
-	ok($dt->month() == 1);
-	ok($dt->year() == 2019);
-	$dt = $dft->parse(string => 'Today is 5/1/19');
-	ok($dt->day() == 5);
-	ok($dt->month() == 1);
-	ok($dt->year() == 2019);
-	$dt = $dft->parse({ string => 'Sunday 1st March 2015' });
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = $dft->parse('Sunday, 1 March 2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = $dft->parse('Sun 1 Mar 2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = $dft->parse('Sun-1-March-2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = $dft->parse('March 1st 2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = DateTime::Format::Text->parse('March 1 2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
-	$dt = DateTime::Format::Text::parse('March-1st-2015');
-	ok($dt->day() == 1);
-	ok($dt->month() == 3);
-	ok($dt->year == 2015);
+	cmp_deeply($dft->parse('Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+	cmp_deeply($dft->parse(string => 'Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+	cmp_deeply($dft->parse({ string => 'Today is 10/1/19' }), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+
+	for my $test (
+		'Sunday, 1 March 2015',
+		'Sunday 1st March 2015',
+		'Sunday, 1 March 2015',
+		'Sun 1 Mar 2015',
+		'Sun-1-March-2015',
+		'March 1st 2015',
+		'March 1 2015',
+		'March-1st-2015',
+	) {
+		cmp_deeply($dft->parse($test), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $test);
+	};
 }
