@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use Test::Most tests => 30;
+use Test::Deeply;
 use Test::NoWarnings;
 
 BEGIN {
