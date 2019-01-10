@@ -7,12 +7,12 @@ README.md
 t/00-load.t
 t/10-new.t
 t/coverage.t
+t/date.t
 t/error.t
 t/link.t
 t/no404s.t
 t/pod-cm.t
 t/pod.t
 t/spelling.t
-t/text.t
 t/unused.t
 t/vars.t
