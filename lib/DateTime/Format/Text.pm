@@ -85,7 +85,9 @@ sub new {
 =head2 parse
 
 Creates a DateTime::Format::Text object.
-Returns a L<DateTime> object constructed from a date/time string embedding in text.
+Returns a L<DateTime> object constructed from a date/time string embedding in aribitrary text.
+
+Can be called as a class or object method.
 
 =cut
 
@@ -94,16 +96,17 @@ sub parse {
 	my %params;
 
 	if(!ref($self)) {
-		%params = ( 'string' => $self );
-		$self = __PACKAGE__->new();
-		if($params{'string'} eq __PACKAGE__) {
-			$params{'string'} = shift;
+		if(scalar(@_)) {
+			return(__PACKAGE__->new()->parse(@_));
 		}
+		return(__PACKAGE__->new()->parse($self));
+	} elsif(ref($self) eq 'HASH') {
+		return(__PACKAGE__->new()->parse($self));
 	} elsif(ref($_[0]) eq 'HASH') {
 		%params = %{$_[0]};
 	} elsif(ref($_[0])) {
 		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
-	} elsif(scalar(@_) % 2 == 0) {
+	} elsif(scalar(@_) && (scalar(@_) % 2 == 0)) {
 		%params = @_;
 	} else {
 		$params{'string'} = shift;

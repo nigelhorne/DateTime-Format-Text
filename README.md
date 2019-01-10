@@ -19,6 +19,14 @@ Find a date in any text.
 ## new
 
 Creates a DateTime::Format::Text object.
+Takes no arguments
+
+## parse
+
+Creates a DateTime::Format::Text object.
+Returns a [DateTime](https://metacpan.org/pod/DateTime) object constructed from a date/time string embedding in aribitrary text.
+
+Can be called as a class or object method.
 
 # AUTHOR
 
@@ -28,7 +36,7 @@ Based on https://github.com/etiennetremel/PHP-Find-Date-in-String.
 Here's the author information from that:
 
     author   Etienne Tremel
-    license  http://creativecommons.org/licenses/by/3.0/ CC by 3.0
+    license  https://creativecommons.org/licenses/by/3.0/ CC by 3.0
     link     http://www.etiennetremel.net
     version  0.2.0
 
