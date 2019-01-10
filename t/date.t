@@ -16,7 +16,7 @@ TEXT: {
 	cmp_deeply($dft->parse('Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
 	cmp_deeply($dft->parse(string => 'Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
 	cmp_deeply($dft->parse({ string => 'Today is 10/1/19' }), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
-	cmp_deeply($dft->parse({ string => '9/1/19 was yesterday' }), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+	cmp_deeply($dft->parse({ string => '9/1/19 was yesterday' }), methods('day' => num(9), 'month' => num(1), 'year' => num(2019)));
 
 	for my $test (
 		'Sunday, 1 March 2015',
