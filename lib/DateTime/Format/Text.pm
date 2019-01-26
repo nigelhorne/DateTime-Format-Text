@@ -100,7 +100,7 @@ sub parse_datetime {
 	} elsif(ref($self) eq 'HASH') {
 		return(__PACKAGE__->new()->parse($self));
 	} elsif(ref($_[0])) {
-		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
+		Carp::croak('Usage: ', __PACKAGE__, '::parse_datetime(string => $string)');
 	}
 
 	return $self->parse(@_);
