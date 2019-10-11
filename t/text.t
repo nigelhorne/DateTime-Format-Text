@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 35;
+use Test::Most tests => 59;
 use Test::Deep;
 use Test::NoWarnings;
 
@@ -44,5 +44,10 @@ TEXT: {
 		cmp_deeply($dft->parse($test), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $test);
 		my $s = "foo $test bar";
 		cmp_deeply($dft->parse_datetime($s), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $s);
+		$s = "foo $test";
+		cmp_deeply($dft->parse_datetime($s), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $s);
+		$s = "$test bar";
+		cmp_deeply($dft->parse_datetime($s), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $s);
+		cmp_deeply($dft->parse_datetime($test), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $test);
 	};
 }
