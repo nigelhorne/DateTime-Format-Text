@@ -90,7 +90,6 @@ Synonym for parse().
 
 sub parse_datetime {
 	my $self = shift;
-	my %params;
 
 	if(!ref($self)) {
 		if(scalar(@_)) {
@@ -109,7 +108,8 @@ sub parse_datetime {
 =head2 parse
 
 Creates a DateTime::Format::Text object.
-Returns a L<DateTime> object constructed from a date/time string embedding in aribitrary text.
+Returns a L<DateTime> object constructed from a date/time string embedding in
+arbitrary text.
 
 Can be called as a class or object method.
 
@@ -202,12 +202,12 @@ sub parse {
 
 Nigel Horne, C<< <njh at bandsman.co.uk> >>
 
-Based on https://github.com/etiennetremel/PHP-Find-Date-in-String.
+Based on L<https://github.com/etiennetremel/PHP-Find-Date-in-String>.
 Here's the author information from that:
 
     author   Etienne Tremel
-    license  https://creativecommons.org/licenses/by/3.0/ CC by 3.0
-    link     http://www.etiennetremel.net
+    license  L<https://creativecommons.org/licenses/by/3.0/> CC by 3.0
+    link     L<http://www.etiennetremel.net>
     version  0.2.0
 
 =head1 BUGS
