@@ -213,7 +213,7 @@ Here's the author information from that:
 
 =head1 SEE ALSO
 
-    L<DateTime::Format::Natural>
+L<DateTime::Format::Natural>
 
 =head1 SUPPORT
 

@@ -48,7 +48,7 @@ Here's the author information from that:
 
 # SEE ALSO
 
-    L<DateTime::Format::Natural>
+[DateTime::Format::Natural](https://metacpan.org/pod/DateTime%3A%3AFormat%3A%3ANatural)
 
 # SUPPORT
 
