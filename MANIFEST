@@ -7,6 +7,8 @@ README.md
 t/00-load.t
 t/10-new.t
 t/coverage.t
+t/eof.t
+t/eol.t
 t/error.t
 t/link.t
 t/no404s.t

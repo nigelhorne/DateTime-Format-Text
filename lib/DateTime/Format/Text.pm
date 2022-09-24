@@ -107,7 +107,6 @@ sub parse_datetime {
  
 =head2 parse
 
-Creates a DateTime::Format::Text object.
 Returns a L<DateTime> object constructed from a date/time string embedding in
 arbitrary text.
 
