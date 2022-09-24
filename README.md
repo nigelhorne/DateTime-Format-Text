@@ -4,7 +4,7 @@ DateTime::Format::Text - Find a Date in Text
 
 # VERSION
 
-Version 0.01
+Version 0.02
 
 # SYNOPSIS
 
@@ -21,10 +21,14 @@ Find a date in any text.
 Creates a DateTime::Format::Text object.
 Takes no arguments
 
+## parse\_datetime
+
+Synonym for parse().
+
 ## parse
 
-Creates a DateTime::Format::Text object.
-Returns a [DateTime](https://metacpan.org/pod/DateTime) object constructed from a date/time string embedding in aribitrary text.
+Returns a [DateTime](https://metacpan.org/pod/DateTime) object constructed from a date/time string embedding in
+arbitrary text.
 
 Can be called as a class or object method.
 
@@ -32,12 +36,12 @@ Can be called as a class or object method.
 
 Nigel Horne, `<njh at bandsman.co.uk>`
 
-Based on https://github.com/etiennetremel/PHP-Find-Date-in-String.
+Based on [https://github.com/etiennetremel/PHP-Find-Date-in-String](https://github.com/etiennetremel/PHP-Find-Date-in-String).
 Here's the author information from that:
 
     author   Etienne Tremel
-    license  https://creativecommons.org/licenses/by/3.0/ CC by 3.0
-    link     http://www.etiennetremel.net
+    license  L<https://creativecommons.org/licenses/by/3.0/> CC by 3.0
+    link     L<http://www.etiennetremel.net>
     version  0.2.0
 
 # BUGS
