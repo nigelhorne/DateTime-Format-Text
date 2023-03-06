@@ -20,4 +20,6 @@ if($@) {
 __END__
 CPAN
 GPL
+GPL2
+licence
 RT

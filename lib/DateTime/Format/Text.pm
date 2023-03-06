@@ -77,9 +77,19 @@ sub new {
 	my $proto = shift;
 	my $class = ref($proto) || $proto;
 
-	return unless(defined($class));
+	if(!defined($class)) {
+		# Using DateTime::Format->new(), not DateTime::Format()
+		# carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
+		# return;
 
-	return bless { }, $class;
+		# FIXME: this only works when no arguments are given
+		return bless { }, __PACKAGE__;
+	} elsif(ref($class)) {
+		# clone the given object
+		return bless { }, ref($class);
+	} else {
+		return bless { }, $class;
+	}
 }
 
 =head2 parse_datetime
@@ -104,10 +114,10 @@ sub parse_datetime {
 
 	return $self->parse(@_);
 }
- 
+
 =head2 parse
 
-Returns a L<DateTime> object constructed from a date/time string embedding in
+Returns a L<DateTime> object constructed from a date/time string embedded in
 arbitrary text.
 
 Can be called as a class or object method.
@@ -139,6 +149,11 @@ sub parse {
 		my $day;
 		my $month;
 		my $year;
+
+		# Allow the text to be an object
+		if(ref($string)) {
+			$string = $string->as_string();
+		}
 
 		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/) {
 			# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
@@ -241,7 +256,7 @@ L<http://search.cpan.org/dist/DateTime-Format-Text/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2019 Nigel Horne.
+Copyright 2019-2023 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
