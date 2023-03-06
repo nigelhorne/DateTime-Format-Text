@@ -131,6 +131,9 @@ sub parse {
 	if(!ref($self)) {
 		if(scalar(@_)) {
 			return(__PACKAGE__->new()->parse(@_));
+		} elsif($self eq __PACKAGE__) {
+			# Date::Time::Format->parse()
+			Carp::croak('Usage: ', $self, '::parse(string => $string)');
 		}
 		return(__PACKAGE__->new()->parse($self));
 	} elsif(ref($self) eq 'HASH') {
