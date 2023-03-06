@@ -176,7 +176,7 @@ sub parse {
 
 		if(!defined($month)) {
 			#  Match month name
-			if($string =~ /($m|$sm)/) {
+			if($string =~ /($m|$sm)/i) {
 				$month = $1;
 			}
 		}
@@ -192,6 +192,14 @@ sub parse {
 			# Match "Sunday 1st"
 			if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)/i) {
 				$day = $1;
+			} elsif($string =~ /\s(\d{1,2})\s/) {
+				$day = $1;
+			} elsif($string =~ /\s(\d{1,2})th\s/) {
+				$day = $1;
+			} elsif($string =~ /\s1st\s/i) {
+				$day = 1;
+			} elsif($string =~ /\s2nd\s/i) {
+				$day = 2;
 			}
 		}
 
