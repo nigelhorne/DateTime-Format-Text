@@ -123,6 +123,8 @@ Can be called as a class or object method.
 
 =cut
 
+# TODO: in array context, find all dates
+
 sub parse {
 	my $self = shift;
 	my %params;
