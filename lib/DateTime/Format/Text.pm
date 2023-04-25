@@ -87,9 +87,8 @@ sub new {
 	} elsif(ref($class)) {
 		# clone the given object
 		return bless { }, ref($class);
-	} else {
-		return bless { }, $class;
 	}
+	return bless { }, $class;
 }
 
 =head2 parse_datetime
@@ -254,10 +253,6 @@ You can also look for information at:
 =item * RT: CPAN's request tracker
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=DateTime-Format-Text>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/DateTime-Format-Text>
 
 =item * Search CPAN
 
