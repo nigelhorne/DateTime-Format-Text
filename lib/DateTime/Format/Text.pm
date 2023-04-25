@@ -150,15 +150,37 @@ sub parse {
 	}
 
 	if(my $string = $params{'string'}) {
-		my $day;
-		my $month;
-		my $year;
-
 		# Allow the text to be an object
 		if(ref($string)) {
 			$string = $string->as_string();
 		}
 
+		# if(wantarray) {	# FIXME: loops with a recursive call
+		if(0) {
+			# Return an array with all of the dates which match
+			my @rc;
+		
+			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/g) {
+				my $r = $self->parse("$1 $2 $3");
+				push @rc, $r;
+			}
+			while($string =~ /($d|$sd)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]*($m|$sm)[\s,\-\/]+(\d{4})/ig) {
+				#  Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
+				my $r = $self->parse("$2 $4 $5");
+				push @rc, $r;
+			}
+			while($string =~ /($m|$sm)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]+(\d{4})/ig) {
+				my $r = $self->parse("$1 $2 $4");
+				push @rc, $r;
+			}
+			return @rc if(scalar(@rc));
+		}
+
+		# !wantarray
+		my $day;
+		my $month;
+		my $year;
+	
 		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/) {
 			# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
 			$day = $1;
