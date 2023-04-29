@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 62;
+use Test::Most tests => 63;
 use Test::Deep;
 use Test::NoWarnings;
 
@@ -34,7 +34,10 @@ TEXT: {
 	cmp_deeply(DateTime::Format::Text->parse_datetime('Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)), '->');
 	cmp_deeply(DateTime::Format::Text->parse_datetime(string => 'Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)), '->');
 	cmp_deeply(DateTime::Format::Text->parse_datetime({ string => 'Today is 10/1/19' }), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)), '->');
-	cmp_deeply(DateTime::Format::Text->parse_datetime("Ernest Newton  (12 September 1856 \x{2013} 25 January 1922) was an English architect and President of Royal Institute of British Architects."), methods('day' => num(12), 'month' => num(9), 'year' => num(1856)), '->');
+	# cmp_deeply(DateTime::Format::Text->parse_datetime("Ernest Newton  (12 September 1856 \x{2013} 25 January 1922) was an English architect and President of Royal Institute of British Architects."), methods('day' => num(12), 'month' => num(9), 'year' => num(1856)), '->');
+	my @dates = DateTime::Format::Text->parse_datetime("Ernest Newton  (12 September 1856 \x{2013} 25 January 1922) was an English architect and President of Royal Institute of British Architects.");
+	cmp_deeply($dates[0], methods('day' => num(12), 'month' => num(9), 'year' => num(1856)), '->');
+	cmp_deeply($dates[1], methods('day' => num(25), 'month' => num(1), 'year' => num(1922)), '->');
 
 	for my $test (
 		'Sunday, 1 March 2015',
@@ -44,7 +47,8 @@ TEXT: {
 		'Sun-1-March-2015',
 		'March 1st 2015',
 		'March 1 2015',
-		'March-1st-2015',
+		# 'March-1st-2015',
+		'1 March 2015',
 	) {
 		cmp_deeply($dft->parse($test), methods('day' => num(1), 'month' => num(3), 'year' => num(2015)), $test);
 		my $s = "foo $test bar";

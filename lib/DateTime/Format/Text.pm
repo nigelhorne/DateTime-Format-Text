@@ -121,9 +121,9 @@ arbitrary text.
 
 Can be called as a class or object method.
 
-=cut
+When called in an array context, returns an array containing all of the matches
 
-# TODO: in array context, find all dates
+=cut
 
 sub parse {
 	my $self = shift;
@@ -155,8 +155,7 @@ sub parse {
 			$string = $string->as_string();
 		}
 
-		# if(wantarray) {	# FIXME: loops with a recursive call
-		if(0) {
+		if(wantarray) {
 			# Return an array with all of the dates which match
 			my @rc;
 		
@@ -175,13 +174,18 @@ sub parse {
 				push @rc, $r;
 			}
 			return @rc if(scalar(@rc));
+			while($string =~ /(\d{1,2})\s($m|$sm)\s(\d{4})/ig) {
+				my $r = $self->parse("$1 $2 $3");	# Force scalar context
+				push @rc, $r;
+			}
+			return @rc if(scalar(@rc));
 		}
 
 		# !wantarray
 		my $day;
 		my $month;
 		my $year;
-	
+
 		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/) {
 			# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
 			$day = $1;
@@ -201,7 +205,6 @@ sub parse {
 			# $day = $1;
 			# $month = $2;
 			# $year = $3;
-			# ::diag("$string -> $day/$month/$year");
 		}
 
 		if(!defined($month)) {
@@ -223,7 +226,9 @@ sub parse {
 			# Match "Sunday 1st"
 			if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)\s+$year/i) {
 				$day = $1;
-			} elsif($string =~ /[\s\(](\d{1,2})\s($m|$sm)/i) {
+			} elsif($string =~ /[\s\(](\d{1,2})\s+($m|$sm)/i) {
+				$day = $1;
+			} elsif($string =~ /^(\d{1,2})\s+($m|$sm)\s/i) {
 				$day = $1;
 			} elsif($string =~ /\s(\d{1,2})th\s/) {
 				$day = $1;
