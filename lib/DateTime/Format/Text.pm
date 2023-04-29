@@ -160,7 +160,8 @@ sub parse {
 			# Return an array with all of the dates which match
 			my @rc;
 		
-			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/g) {
+			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
+				# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
 				my $r = $self->parse("$1 $2 $3");
 				push @rc, $r;
 			}
@@ -181,7 +182,7 @@ sub parse {
 		my $month;
 		my $year;
 	
-		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/) {
+		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/) {
 			# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
 			$day = $1;
 			$month = $2;
@@ -195,6 +196,12 @@ sub parse {
 			$month //= $1;
 			$day //= $2;
 			$year //= $4;
+		# } elsif($string =~ /[^\s,\(](\d{1,2})\s+($m|$sm)[\s,]+(\d{4})/i) {
+			# # 12 September 1856
+			# $day = $1;
+			# $month = $2;
+			# $year = $3;
+			# ::diag("$string -> $day/$month/$year");
 		}
 
 		if(!defined($month)) {
@@ -211,11 +218,12 @@ sub parse {
 			}
 		}
 
+		# We've managed to dig out a month and year, is there anything that looks like a day?
 		if(defined($month) && defined($year) && !defined($day)) {
 			# Match "Sunday 1st"
-			if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)/i) {
+			if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)\s+$year/i) {
 				$day = $1;
-			} elsif($string =~ /\s(\d{1,2})\s/) {
+			} elsif($string =~ /[\s\(](\d{1,2})\s($m|$sm)/i) {
 				$day = $1;
 			} elsif($string =~ /\s(\d{1,2})th\s/) {
 				$day = $1;
@@ -259,6 +267,8 @@ Here's the author information from that:
     version  0.2.0
 
 =head1 BUGS
+
+In array mode, it would be good to find more than one date in the string
 
 =head1 SEE ALSO
 
