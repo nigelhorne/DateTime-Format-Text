@@ -1,5 +1,8 @@
 Revision history for DateTime-Format-Text
 
+0.04
+	Remove errant return statement
+
 0.03	Sat Apr 29 16:46:07 EDT 2023
 	Calling new on an object now returns a clone rather than setting the defaults in the new object
 	Try harder to match random text

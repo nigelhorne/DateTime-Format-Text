@@ -159,6 +159,8 @@ sub parse {
 			# Return an array with all of the dates which match
 			my @rc;
 		
+			# FIXME: note that this method will not preserve the order of the dates in the string
+
 			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
 				# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
 				my $r = $self->parse("$1 $2 $3");
@@ -169,13 +171,12 @@ sub parse {
 				my $r = $self->parse("$2 $4 $5");
 				push @rc, $r;
 			}
-			while($string =~ /($m|$sm)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]+(\d{4})/ig) {
-				my $r = $self->parse("$1 $2 $4");
-				push @rc, $r;
-			}
-			return @rc if(scalar(@rc));
 			while($string =~ /(\d{1,2})\s($m|$sm)\s(\d{4})/ig) {
 				my $r = $self->parse("$1 $2 $3");	# Force scalar context
+				push @rc, $r;
+			}
+			while($string =~ /($m|$sm)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]+(\d{4})/ig) {
+				my $r = $self->parse("$1 $2 $4");
 				push @rc, $r;
 			}
 			return @rc if(scalar(@rc));
@@ -273,7 +274,7 @@ Here's the author information from that:
 
 =head1 BUGS
 
-In array mode, it would be good to find more than one date in the string
+In array mode, the order of the dates is random.
 
 =head1 SEE ALSO
 
