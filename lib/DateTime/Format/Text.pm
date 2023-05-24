@@ -158,7 +158,7 @@ sub parse {
 		if(wantarray) {
 			# Return an array with all of the dates which match
 			my @rc;
-		
+
 			# Ensure that the result includes the dates in the
 			# same order that they are in the string
 			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
