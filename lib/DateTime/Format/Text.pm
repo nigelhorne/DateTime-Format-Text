@@ -160,6 +160,8 @@ sub parse {
 			my @rc;
 		
 			# FIXME: note that this method will not preserve the order of the dates in the string
+			#	The fix is to "pos $string" to say where the end of the match is in the string and
+			#	sort on that
 
 			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
 				# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
