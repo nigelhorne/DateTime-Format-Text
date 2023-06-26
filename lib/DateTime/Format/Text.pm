@@ -251,6 +251,8 @@ sub parse {
 						return DateTime->new(day => $day, month => $i + 1, year => $year);
 					}
 				}
+				Carp::croak(__PACKAGE__, ": unknown month $month");
+				return;
 			} else {
 				return DateTime->new(day => $day, month => $month, year => $year);
 			}

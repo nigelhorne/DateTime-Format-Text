@@ -1,5 +1,8 @@
 Revision history for DateTime-Format-Text
 
+0.05
+	Croak if we can't work out the date
+
 0.04	Fri May 26 14:07:19 EDT 2023
 	Remove errant return statement
 	In array context, ensure that the array is in the same order as the
