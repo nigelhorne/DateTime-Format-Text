@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 69;
+use Test::Most tests => 71;
 use Test::Deep;
 use Test::NoWarnings;
 
@@ -48,6 +48,11 @@ TEXT: {
 	cmp_deeply($dates[1], methods('day' => num(23), 'month' => num(5), 'year' => num(1993)), '->');
 	cmp_deeply($dates[2], methods('day' => num(21), 'month' => num(4), 'year' => num(1948)), '->');
 	cmp_deeply($dates[3], methods('day' => num(31), 'month' => num(12), 'year' => num(1973)), '->');
+
+	# Test that this doesn't match 70-18/19 as a date
+	@dates = DateTime::Format::Text->parse_datetime('Albert Johan Petersson (6 February 1870-18/19 August 1914) was a Swedish chemist, engineer and industrialist. He is most known as the developer of the Alby-furnace for producing of Calcium carbide and as the first director of the carbide and cyanamide factories in Odda in Norway. He was born in Landskrona, Sweden and probably died during a boat trip between Odda and Bergen.');
+	cmp_deeply($dates[0], methods('day' => num(6), 'month' => num(2), 'year' => num(1870)), '->');
+	cmp_deeply($dates[1], methods('day' => num(19), 'month' => num(8), 'year' => num(1914)), '->');
 
 	for my $test (
 		'Sunday, 1 March 2015',

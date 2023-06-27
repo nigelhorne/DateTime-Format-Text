@@ -161,9 +161,9 @@ sub parse {
 
 			# Ensure that the result includes the dates in the
 			# same order that they are in the string
-			while($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
+			while($string =~ /(^|\D)([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/g) {
 				# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
-				$rc[pos $string] = $self->parse("$1 $2 $3");
+				$rc[pos $string] = $self->parse("$2 $3 $4");
 			}
 			while($string =~ /($d|$sd)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]*($m|$sm)[\s,\-\/]+(\d{4})/ig) {
 				#  Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
@@ -187,11 +187,11 @@ sub parse {
 		my $month;
 		my $year;
 
-		if($string =~ /([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/) {
+		if($string =~ /(^|\D)([0-9]?[0-9])[\.\-\/ ]+?([0-1]?[0-9])[\.\-\/ ]+?([0-9]{2,4})/) {
 			# Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
-			$day = $1;
-			$month = $2;
-			$year = $3;
+			$day = $2;
+			$month = $3;
+			$year = $4;
 		} elsif($string =~ /($d|$sd)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]*($m|$sm)[\s,\-\/]+(\d{4})/i) {
 			#  Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
 			$day //= $2;
