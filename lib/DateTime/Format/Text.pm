@@ -43,8 +43,8 @@ our @day_names = (
 );
 
 our @ordinal_number = ('st', 'nd', 'rd', 'th');
-our @short_month_names = map { _shortenize($_) } @month_names;
-our @short_day_names = map { _shortenize($_) } @day_names;
+our @short_month_names = map { _shorten($_) } @month_names;
+our @short_day_names = map { _shorten($_) } @day_names;
 
 our $d = join('|', @day_names);
 our $sd = join('|', @short_day_names);
@@ -52,7 +52,7 @@ our $o = join('|', @ordinal_number);
 our $m = join('|', @month_names);
 our $sm = join('|', @short_month_names);
 
-sub _shortenize {
+sub _shorten {
 	return substr(shift, 0, 3);
 };
 
