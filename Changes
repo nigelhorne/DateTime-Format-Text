@@ -1,6 +1,6 @@
 Revision history for DateTime-Format-Text
 
-0.05
+0.05 Tue Jun 27 21:40:01 EDT 2023
 	Croak if we can't work out the date
 	Fix misparsing of the string "6 February 1870-18/19 August 1914"
 
