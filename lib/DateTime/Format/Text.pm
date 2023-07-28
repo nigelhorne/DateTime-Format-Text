@@ -208,18 +208,14 @@ sub parse {
 			# $year = $3;
 		}
 
-		if(!defined($month)) {
+		if((!defined($month)) && ($string =~ /($m|$sm)/i)) {
 			#  Match month name
-			if($string =~ /($m|$sm)/i) {
-				$month = $1;
-			}
+			$month = $1;
 		}
 
-		if(!defined($year)) {
+		if((!defined($year)) && ($string =~ /(\d{4})/)) {
 			# Match Year if not already set
-			if($string =~ /(\d{4})/) {
-				$year = $1;
-			}
+			$year = $1;
 		}
 
 		# We've managed to dig out a month and year, is there anything that looks like a day?
@@ -231,8 +227,10 @@ sub parse {
 				$day = $1;
 			} elsif($string =~ /^(\d{1,2})\s+($m|$sm)\s/i) {
 				$day = $1;
-			} elsif($string =~ /\s(\d{1,2})th\s/) {
-				$day = $1;
+			} elsif($string =~ /($m|$sm)\s+(the\s+)?(\d{1,2})th\s/i) {
+				$day = $3;
+			} elsif($string =~ /($m|$sm)\s+the\s+(\d{1,2})th\s/) {
+				$day = $2;
 			} elsif($string =~ /\s1st\s/i) {
 				$day = 1;
 			} elsif($string =~ /\s2nd\s/i) {
