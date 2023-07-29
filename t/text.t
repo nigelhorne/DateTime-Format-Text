@@ -2,7 +2,8 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 71;
+use Class::Simple;
+use Test::Most tests => 73;
 use Test::Deep;
 use Test::NoWarnings;
 
@@ -25,6 +26,11 @@ TEXT: {
 	cmp_deeply($dft->parse_datetime(string => 'yesterday was January the 9th in the year 2019'), methods('day' => num(9), 'month' => num(1), 'year' => num(2019)));
 
 	cmp_deeply($dft->parse_datetime('Today is 10/1/19'), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+
+	my $text = new_ok('Class::Simple');
+	$text->as_string('Today is 10/1/19');
+	cmp_deeply($dft->parse(string => $text), methods('day' => num(10), 'month' => num(1), 'year' => num(2019)));
+
 	# Sic - Sunnday
 	cmp_deeply($dft->parse('Sunnday 29 Sep 1939'), methods('day' => num(29), 'month' => num(9), 'year' => num(1939)));
 

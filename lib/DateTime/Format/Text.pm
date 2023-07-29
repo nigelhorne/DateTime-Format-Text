@@ -11,11 +11,11 @@ DateTime::Format::Text - Find a Date in Text
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 our @month_names = (
 	'january',
@@ -78,7 +78,7 @@ sub new {
 	my $class = ref($proto) || $proto;
 
 	if(!defined($class)) {
-		# Using DateTime::Format->new(), not DateTime::Format()
+		# Using DateTime::Format::Text::new(), not DateTime::Format::Text->new()
 		# carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
 		# return;
 
@@ -121,7 +121,14 @@ arbitrary text.
 
 Can be called as a class or object method.
 
-When called in an array context, returns an array containing all of the matches
+When called in an array context, returns an array containing all of the matches.
+
+If the given test is an object, it's sent the message as_string() and that is parsed
+
+    use Class::Simple;
+    my $foo = Class::Simple->new();
+    $foo->as_string('25/12/2022');
+    my $dt = $dft->parse($foo);
 
 =cut
 
@@ -132,8 +139,10 @@ sub parse {
 	if(!ref($self)) {
 		if(scalar(@_)) {
 			return(__PACKAGE__->new()->parse(@_));
+		} elsif(!defined($self)) {
+			# DateTime::Format::Text->parse()
+			Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
 		} elsif($self eq __PACKAGE__) {
-			# Date::Time::Format->parse()
 			Carp::croak('Usage: ', $self, '::parse(string => $string)');
 		}
 		return(__PACKAGE__->new()->parse($self));
@@ -141,6 +150,7 @@ sub parse {
 		return(__PACKAGE__->new()->parse($self));
 	} elsif(ref($_[0]) eq 'HASH') {
 		%params = %{$_[0]};
+	# } elsif(ref($_[0]) && (ref($_[0] !~ /::/))) {
 	} elsif(ref($_[0])) {
 		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
 	} elsif(scalar(@_) && (scalar(@_) % 2 == 0)) {
