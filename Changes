@@ -3,6 +3,7 @@ Revision history for DateTime-Format-Text
 0.06
 	Fix misparse of "Foo in November 2009 Bar. XYZZY 45th PLUGH 7th TULIP"
 		which parsed as 45/11/09
+	Increased test coverage
 
 0.05 Tue Jun 27 21:40:01 EDT 2023
 	Croak if we can't work out the date

@@ -259,6 +259,7 @@ sub parse {
 						return DateTime->new(day => $day, month => $i + 1, year => $year);
 					}
 				}
+				# This code should be unreachable
 				Carp::croak(__PACKAGE__, ": unknown month $month");
 				return;
 			} else {
