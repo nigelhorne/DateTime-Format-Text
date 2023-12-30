@@ -130,6 +130,10 @@ If the given test is an object, it's sent the message as_string() and that is pa
     $foo->as_string('25/12/2022');
     my $dt = $dft->parse($foo);
 
+    # or
+
+    print DateTime::Format::Text->parse('25 Dec 2021, 11:00 AM UTC')->epoch(), "\n";
+
 =cut
 
 sub parse {
