@@ -1,5 +1,6 @@
 ---
 # See https://github.com/actions/virtual-environments
+# https://github.com/marketplace/actions/setup-perl-environment
 
 name: Test Code
 on:
@@ -37,6 +38,11 @@ jobs:
           cpanm -iqn --skip-satisfied ExtUtils::MakeMaker Test::Most
           cpanm -iqn --skip-satisfied Test::Portability::Files
           cpanm -iqn --skip-satisfied --installdeps --notest .
+      - name: Make Module
+        run: |
+          # find . -name build.log | xargs cat
+          perl Makefile.PL
+          make
       - name: Run Tests
         run: prove -l -b t
         env:

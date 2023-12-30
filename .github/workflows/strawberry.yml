@@ -32,7 +32,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cpanm -iqn --skip-satisfied File::Spec ExtUtils::MakeMaker Test::Harness
-          cpanm -iqn --skip-satisfied Test::Compile Test::Pod::Coverage
+          cpanm -iqn --skip-satisfied Test::Compile Test::Pod::Coverage Test::Carp
           cpanm -iqn --skip-satisfied --installdeps --notest .
       - name: Run Tests
         run: prove -l t
