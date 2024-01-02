@@ -11,11 +11,11 @@ DateTime::Format::Text - Find a Date in Text
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 our @month_names = (
 	'january',
