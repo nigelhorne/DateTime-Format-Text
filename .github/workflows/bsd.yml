@@ -18,7 +18,7 @@ jobs:
         os:
           - name: freebsd
             version: '13.0'
-            pkginstall: pkg install -y p5-ExtUtils-MakeMaker p5-DateTime
+            pkginstall: pkg install -y p5-ExtUtils-MakeMaker p5-DateTime p5-Test-Needs p5-Test-Most p5-Test-Pod p5-Test-Deep
           - name: openbsd
             version: '7.1'
             pkginstall: pkg_add p5-DateTime
@@ -37,7 +37,8 @@ jobs:
             sudo hostname example.com
             sudo ${{ matrix.os.pkginstall }}
             curl -L https://cpanmin.us | sudo perl - --notest --installdeps --with-configure --with-develop .
+            sudo cpan -iT Class::Simple Test::Pod::LinkCheck
             sudo chown -R runner:runner .
-            perl Makefile.PL
-            make
-            prove -wlmb t
+            AUTOMATED_TESTING=1 perl Makefile.PL
+            AUTOMATED_TESTING=1 make
+            AUTOMATED_TESTING=1 prove -wlmb t
