@@ -11,11 +11,11 @@ DateTime::Format::Text - Find a Date in Text
 
 =head1 VERSION
 
-Version 0.08
+Version 0.07
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.07';
 
 our @month_names = (
 	'january',
@@ -324,7 +324,7 @@ L<http://search.cpan.org/dist/DateTime-Format-Text/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2019-2023 Nigel Horne.
+Copyright 2019-2024 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
