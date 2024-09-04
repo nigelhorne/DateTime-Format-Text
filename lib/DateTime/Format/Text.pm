@@ -74,8 +74,7 @@ Takes no arguments
 =cut
 
 sub new {
-	my $proto = shift;
-	my $class = ref($proto) || $proto;
+	my $class = shift;
 
 	if(!defined($class)) {
 		# Using DateTime::Format::Text::new(), not DateTime::Format::Text->new()
