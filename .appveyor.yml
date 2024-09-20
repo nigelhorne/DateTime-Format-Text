@@ -1,3 +1,4 @@
+---
 version: 1.0.{build}
 
 image:
@@ -13,6 +14,9 @@ environment:
   # TEST_VERBOSE: 1
   DEBIAN_FRONTEND: noninteractive
   PERL_MM_USE_DEFAULT: 1
+  NO_NETWORK_TESTING: 1
+  AUTHOR_TESTING: 1
+  NONINTERACTIVE_TESTING: 1
 
 platform: x64
 
@@ -27,7 +31,7 @@ install:
   - cmd: path C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
   # - cmd: cd C:\projects\%APPVEYOR_PROJECT_NAME%
   # Currently fails on http://apt.postgresql.org/pub/repos/apt bionic-pgdg Release
-  # - sh: sudo apt update -q -y
+  - sh: sudo apt update -q -y
   - sh: sudo apt-get install -y build-essential git libssl-dev
   - sh: sudo apt-get install -y perl libdatetime-perl
   - sh: export PATH=/home/appveyor/perl5/bin:$PATH
@@ -36,7 +40,7 @@ install:
   - cmd: set TMPDIR=%APPVEYOR_BUILD_FOLDER%\tmp
   - cpan App::cpanminus
   - cmd: cpanm -q --showdeps --with-develop --with-suggests . | findstr /v "^perl\>" | cpanm -n
-  - cpanm -v --installdeps .
+  - cpanm -qin --skip-satisfied --installdeps .
   - cmd: 'echo End install at: & time /t'
 
 build_script:
