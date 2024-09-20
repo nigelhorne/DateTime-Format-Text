@@ -15,6 +15,7 @@ WriteMakefile(
 	TEST_REQUIRES => {
 		'Class::Simple' => 0,
 		'Test::Deep' => 0,
+		'Test::DescribeMe' => 0,
 		'Test::Most' => 0,
 		'Test::Needs' => 0,
 		'Test::NoWarnings' => 0,
