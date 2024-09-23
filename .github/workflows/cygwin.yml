@@ -24,13 +24,15 @@ jobs:
         with:
           platform: x64
           packages: perl_base perl-ExtUtils-MakeMaker make gcc-g++ libcrypt-devel libnsl-devel bash
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - run: perl -V
       - run: cpan App::cpanminus
       - name: Install Dependencies
-        run: cd $GITHUB_WORKSPACE; cpanm --verbose --notest --installdeps --with-configure --with-develop .
+        run: |
+          cd $GITHUB_WORKSPACE; cpan -i App::cpanminus
+          cd $GITHUB_WORKSPACE; cpanm --verbose --notest --installdeps --with-configure --with-develop .
       - name: perl Makefile.PL
         run: cd $GITHUB_WORKSPACE; perl Makefile.PL
       - name: make
