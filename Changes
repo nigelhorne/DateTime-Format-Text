@@ -1,5 +1,10 @@
 Revision history for DateTime-Format-Text
 
+0.09
+	Try DateTime::Format::Flexible as a last ditch attempt
+	Use gtar to create a distribution on Macs
+	Use Test::DescribeMe to simplify tests
+
 0.08	Sat Apr  6 10:32:47 EDT 2024
 	Use Test::Needs
 	parse(): fix support of being given an object

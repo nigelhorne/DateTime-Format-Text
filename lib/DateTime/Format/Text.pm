@@ -205,6 +205,7 @@ sub parse {
 		}
 
 		# !wantarray
+
 		my $day;
 		my $month;
 		my $year;
@@ -277,6 +278,13 @@ sub parse {
 			}
 			return DateTime->new(day => $day, month => $month, year => $year);
 		}
+		eval {
+			require DateTime::Format::Flexible;
+
+			my $rc = DateTime::Format::Flexible->parse_datetime($string);
+
+			return $rc if(defined($rc));
+		};
 	} else {
 		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
 	}
