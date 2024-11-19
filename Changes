@@ -4,6 +4,7 @@ Revision history for DateTime-Format-Text
 	Try DateTime::Format::Flexible as a last ditch attempt
 	Use gtar to create a distribution on Macs
 	Use Test::DescribeMe to simplify tests
+	Find more ordinal numbers
 
 0.08	Sat Apr  6 10:32:47 EDT 2024
 	Use Test::Needs

@@ -256,8 +256,16 @@ sub parse {
 				$day = $2;
 			} elsif($string =~ /\s1st\s/i) {
 				$day = 1;
+			} elsif($string =~ /^1st\s/i) {
+				$day = 1;
 			} elsif($string =~ /\s2nd\s/i) {
 				$day = 2;
+			} elsif($string =~ /^2nd\s/i) {
+				$day = 2;
+			} elsif($string =~ /\s(\d{1,2})th\s/i) {
+				$day = $1;
+			} elsif($string =~ /^(\d{1,2})th\s/i) {
+				$day = $1;
 			}
 		}
 
@@ -278,6 +286,7 @@ sub parse {
 			}
 			return DateTime->new(day => $day, month => $month, year => $year);
 		}
+		# Last ditch if all else fails
 		eval {
 			require DateTime::Format::Flexible;
 
