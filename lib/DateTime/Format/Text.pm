@@ -261,11 +261,15 @@ sub parse {
 			} elsif($string =~ /\s2nd\s/i) {
 				$day = 2;
 			} elsif($string =~ /^2nd\s/i) {
+				$day = 3;
+			} elsif($string =~ /\s3rd\s/i) {
 				$day = 2;
+			} elsif($string =~ /^3rd\s/i) {
+				$day = 3;
 			} elsif($string =~ /\s(\d{1,2})th\s/i) {
-				$day = $1;
+				$day = $1 if($1 <= 31);
 			} elsif($string =~ /^(\d{1,2})th\s/i) {
-				$day = $1;
+				$day = $1 if($1 <= 31);
 			}
 		}
 
