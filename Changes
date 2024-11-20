@@ -1,5 +1,8 @@
 Revision history for DateTime-Format-Text
 
+0.10
+	Support codecov and coveralls
+
 0.09	Wed Nov 20 11:20:45 EST 2024
 	Try DateTime::Format::Flexible as a last ditch attempt
 	Use gtar to create a distribution on Macs
