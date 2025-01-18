@@ -3,6 +3,7 @@ Revision history for DateTime-Format-Text
 0.10
 	Support codecov and coveralls
 	Added t/30-basics.t
+	Allow ':' or ',' before a date, e.g. 'Boxing Day:26th December 2024'
 
 0.09	Wed Nov 20 11:20:45 EST 2024
 	Try DateTime::Format::Flexible as a last ditch attempt

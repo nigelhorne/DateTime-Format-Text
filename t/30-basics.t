@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 11;
+use Test::Most tests => 13;
 
 BEGIN { use_ok('DateTime::Format::Text') }
 
@@ -18,6 +18,8 @@ my @test_cases = (
 	{ input => 'July 4, 1776', day => 4, month => 7, year => 1776 },
 	{ input => '1st February 2000', day => 1, month => 2, year => 2000 },
 	{ input => '25 Dec 2021', day => 25, month => 12, year => 2021 },
+	{ input => 'Christmas Day: 25 Dec 2021', day => 25, month => 12, year => 2021 },
+	{ input => 'Boxing Day:26 Dec 2021', day => 26, month => 12, year => 2021 },
 );
 
 foreach my $case (@test_cases) {

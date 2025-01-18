@@ -268,7 +268,7 @@ sub parse {
 			# Match "Sunday 1st"
 			if($string =~ /($d|$sd)[,\s\-\/]+(\d?\d)[,\-\/]*($o)\s+$year/i) {
 				$day = $1;
-			} elsif($string =~ /[\s\(](\d{1,2})\s+($m|$sm)/i) {
+			} elsif($string =~ /[\s\(:,](\d{1,2})\s+($m|$sm)/i) {	# Allow '(', ',' or ':' before the date
 				$day = $1;
 			} elsif($string =~ /^(\d{1,2})\s+($m|$sm)\s/i) {
 				$day = $1;
