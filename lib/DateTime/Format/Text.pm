@@ -2,8 +2,10 @@ package DateTime::Format::Text;
 
 use strict;
 use warnings;
-use DateTime;
+
 use Carp;
+use DateTime;
+use Scalar::Util;
 
 =head1 NAME
 
@@ -76,6 +78,7 @@ Takes no arguments
 sub new {
 	my $class = shift;
 
+	# If the class is undefined, fallback to the current package name
 	if(!defined($class)) {
 		# Using DateTime::Format::Text::new(), not DateTime::Format::Text->new()
 		# carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
@@ -83,8 +86,8 @@ sub new {
 
 		# FIXME: this only works when no arguments are given
 		return bless { }, __PACKAGE__;
-	} elsif(ref($class)) {
-		# clone the given object
+	} elsif(Scalar::Util::blessed($class)) {
+		# If $class is an object, clone it with new arguments
 		return bless { }, ref($class);
 	}
 	return bless { }, $class;
