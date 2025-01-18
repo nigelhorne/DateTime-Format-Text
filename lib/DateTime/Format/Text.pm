@@ -1,5 +1,7 @@
 package DateTime::Format::Text;
 
+# TODO: Add localization
+
 use strict;
 use warnings;
 
