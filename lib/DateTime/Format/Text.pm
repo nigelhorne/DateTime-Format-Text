@@ -67,6 +67,8 @@ Extract and parse date strings from arbitrary text.
 
     use DateTime::Format::Text;
     my $dft = DateTime::Format::Text->new();
+    my $dt = $dft->parse('Christmas Day: 25 Dec 2024');
+    print $dt->day(), "\n";	# Prints 25
     # ...
 
 =head1 SUBROUTINES/METHODS
@@ -212,7 +214,7 @@ sub parse {
 				$rc[pos $string] = $self->parse("$2 $3 $4");
 			}
 			while($string =~ /($d|$sd)[\s,\-_\/]*?(\d?\d)[,\-\/]*($o)?[\s,\-\/]*($m|$sm)[\s,\-\/]+(\d{4})/ig) {
-				#  Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
+				# Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
 				$rc[pos $string] = $self->parse("$2 $4 $5");
 			}
 			while($string =~ /(\d{1,2})\s($m|$sm)\s(\d{4})/ig) {
@@ -256,7 +258,7 @@ sub parse {
 		}
 
 		if((!defined($month)) && ($string =~ /($m|$sm)/i)) {
-			#  Match month name
+			# Match month name
 			$month = $1;
 		}
 
@@ -334,10 +336,10 @@ Nigel Horne, C<< <njh at bandsman.co.uk> >>
 Based on L<https://github.com/etiennetremel/PHP-Find-Date-in-String>.
 Here's the author information from that:
 
-author   Etienne Tremel
-license  L<https://creativecommons.org/licenses/by/3.0/> CC by 3.0
-link     L<http://www.etiennetremel.net>
-version  0.2.0
+author	Etienne Tremel
+license	L<https://creativecommons.org/licenses/by/3.0/> CC by 3.0
+link	L<http://www.etiennetremel.net>
+version	0.2.0
 
 =head1 BUGS
 

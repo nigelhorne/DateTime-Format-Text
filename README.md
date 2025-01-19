@@ -12,6 +12,8 @@ Extract and parse date strings from arbitrary text.
 
     use DateTime::Format::Text;
     my $dft = DateTime::Format::Text->new();
+    my $dt = $dft->parse('Christmas Day: 25 Dec 2024');
+    print $dt->day(), "\n";     # Prints 25
     # ...
 
 # SUBROUTINES/METHODS
@@ -58,10 +60,10 @@ Nigel Horne, `<njh at bandsman.co.uk>`
 Based on [https://github.com/etiennetremel/PHP-Find-Date-in-String](https://github.com/etiennetremel/PHP-Find-Date-in-String).
 Here's the author information from that:
 
-author   Etienne Tremel
-license  [https://creativecommons.org/licenses/by/3.0/](https://creativecommons.org/licenses/by/3.0/) CC by 3.0
-link     [http://www.etiennetremel.net](http://www.etiennetremel.net)
-version  0.2.0
+author	Etienne Tremel
+license	[https://creativecommons.org/licenses/by/3.0/](https://creativecommons.org/licenses/by/3.0/) CC by 3.0
+link	[http://www.etiennetremel.net](http://www.etiennetremel.net)
+version	0.2.0
 
 # BUGS
 
