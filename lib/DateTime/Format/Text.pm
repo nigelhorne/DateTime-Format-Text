@@ -307,7 +307,14 @@ sub parse {
 			if($month =~ /[a-z]/i) {
 				foreach my $i(0..11) {
 					if(($month eq $month_names[$i]) || ($month eq $short_month_names[$i])) {
-						return DateTime->new(day => $day, month => $i + 1, year => $year);
+						my $rc;
+						eval {
+							$rc = DateTime->new(day => $day, month => $i + 1, year => $year)
+						};
+						if($@) {
+							Carp::croak(__PACKAGE__, ": Parse error on '$day, $month, $year'");
+						}
+						return $rc if(defined($rc));
 					}
 				}
 				# This code should be unreachable

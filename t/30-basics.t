@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 13;
+use Test::Most tests => 14;
 
 BEGIN { use_ok('DateTime::Format::Text') }
 
@@ -59,3 +59,13 @@ subtest 'Ambiguous date format' => sub {
 	isa_ok($dt, 'DateTime', 'Returned a DateTime object');
 	ok($dt->year >= 2000, 'Assumes 21st century for ambiguous years');
 };
+
+subtest 'Invalid day of month' => sub {
+	my $dt;
+	throws_ok {
+		$dt = $parser->parse('He was born at Canterbury, Kent (England), September 37, 1827, and was one of a family of sixteen children.')
+	}
+		qr/Parse error on/,
+		'Check 37 days in September fails';
+	ok(!defined($dt))
+}
