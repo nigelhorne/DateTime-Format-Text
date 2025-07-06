@@ -47,6 +47,7 @@ our @day_names = (
 );
 
 our @ordinal_number = ('st', 'nd', 'rd', 'th');
+# our @short_month_names = List::Uniq::uniq map { _shorten($_) } keys %Readonly::Values::Months::months;
 our @short_month_names = map { _shorten($_) } @month_names;
 our @short_day_names = map { _shorten($_) } @day_names;
 
