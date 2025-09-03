@@ -2,6 +2,7 @@ Revision history for DateTime-Format-Text
 
 0.11
 	Catch exceptions in DateTime->new()
+	Use Readonly::Values::Months
 
 0.10	Sat Jan 18 09:44:10 EST 2025
 	Allow ':' or ',' before a date, e.g. 'Boxing Day:26th December 2024'

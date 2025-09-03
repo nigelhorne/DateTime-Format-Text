@@ -7,6 +7,7 @@ use warnings;
 
 use Carp;
 use DateTime;
+use Readonly::Values::Months qw(@month_names @short_month_names);
 use Scalar::Util;
 
 =head1 NAME
@@ -21,21 +22,6 @@ Version 0.10
 
 our $VERSION = '0.10';
 
-our @month_names = (
-	'january',
-	'february',
-	'march',
-	'april',
-	'may',
-	'june',
-	'july',
-	'august',
-	'september',
-	'october',
-	'november',
-	'december'
-);
-
 our @day_names = (
 	'monday',
 	'tuesday',
@@ -48,7 +34,6 @@ our @day_names = (
 
 our @ordinal_number = ('st', 'nd', 'rd', 'th');
 # our @short_month_names = List::Uniq::uniq map { _shorten($_) } keys %Readonly::Values::Months::months;
-our @short_month_names = map { _shorten($_) } @month_names;
 our @short_day_names = map { _shorten($_) } @day_names;
 
 our $d = join('|', @day_names);
@@ -339,7 +324,7 @@ sub parse {
 
 =head1 AUTHOR
 
-Nigel Horne, C<< <njh at bandsman.co.uk> >>
+Nigel Horne, C<< <njh at nigelhorne.com> >>
 
 Based on L<https://github.com/etiennetremel/PHP-Find-Date-in-String>.
 Here's the author information from that:

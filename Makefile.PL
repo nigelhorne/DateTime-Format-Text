@@ -13,7 +13,7 @@ if($^O eq 'darwin') {
 
 WriteMakefile(
 	NAME		=> 'DateTime::Format::Text',
-	AUTHOR		=> q{Nigel Horne <njh@bandsman.co.uk>},
+	AUTHOR		=> q{Nigel Horne <njh@nigelhorne.com>},
 	VERSION_FROM	=> 'lib/DateTime/Format/Text.pm',
 	ABSTRACT_FROM	=> 'lib/DateTime/Format/Text.pm',
 	((defined($ExtUtils::MakeMaker::VERSION) &&
@@ -41,6 +41,7 @@ WriteMakefile(
 		'DateTime' => 0,
 		'DateTime::Format::Flexible' => 0,
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
+		'Readonly::Values::Months' => 0.03,
 		'Scalar::Util' => 0
 	}, dist => $dist,
 	clean		=> { FILES => 'DateTime-Format-Text-*' },
