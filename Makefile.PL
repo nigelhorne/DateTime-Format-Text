@@ -23,6 +23,7 @@ WriteMakefile(
 	PL_FILES	=> {},
 	TEST_REQUIRES => {
 		'Class::Simple' => 0,
+		'IPC::System::Simple' => 0,
 		'Test::Deep' => 0,
 		'Test::DescribeMe' => 0,
 		'Test::Most' => 0,
