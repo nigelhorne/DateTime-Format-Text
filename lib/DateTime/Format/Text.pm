@@ -42,11 +42,6 @@ our $o = join('|', @ordinal_number);
 our $m = join('|', @month_names);
 our $sm = join('|', @short_month_names);
 
-# Helper routine: Shorten strings to their first three characters
-sub _shorten {
-	return substr(shift, 0, 3);
-};
-
 =head1 SYNOPSIS
 
 Extract and parse date strings from arbitrary text.
@@ -321,6 +316,11 @@ sub parse {
 		Carp::croak('Usage: ', __PACKAGE__, '::parse(string => $string)');
 	}
 }
+
+# Helper routine: Shorten strings to their first three characters
+sub _shorten {
+	return substr(shift, 0, 3);
+};
 
 =head1 AUTHOR
 
